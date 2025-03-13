@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Image Metadata Enrichment</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+    </head>
+    <body>
+        <h1>Image Metadata Enrichment</h1>
+        <div id="upload-section">
+            <input type="file" id="image-upload" accept="image/*" />
+            <button onclick="uploadImage()">Upload Image</button>
+        </div>
+
+        <div id="image-container">
+            <img id="image-preview" src="" alt="Image Preview" />
+            <div class="tags" id="tags"></div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
