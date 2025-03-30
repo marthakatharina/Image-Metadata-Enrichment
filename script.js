@@ -65,8 +65,8 @@ async function classifyImage(imageElement) {
             results.forEach((result) => {
                 const mlResult = `${result.label}`;
                 const tag = document.createElement("span");
-                tag.textContent = tag;
-                tagsDiv.appendChild(mlResult);
+                tag.textContent = mlResult;
+                tagsDiv.appendChild(tag);
             });
         } else {
             console.error("Invalid results format:", results);
