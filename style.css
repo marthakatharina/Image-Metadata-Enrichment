@@ -1,18 +1,18 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
 }
 #image-container {
     margin-top: 20px;
+    width: 350px;
+    height: 350px;
+    background-color: gray;
 }
-#upload-section,
-#url-section {
+#upload-section {
     margin-bottom: 20px;
 }
 #image-preview {
-    max-width: 100%;
+    max-width: 350px;
     height: auto;
-    margin-top: 10px;
 }
 .tags {
     margin-top: 10px;

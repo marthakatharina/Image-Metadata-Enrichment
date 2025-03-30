@@ -19,6 +19,12 @@ function uploadImage() {
             // Set the image source to the uploaded file
             imagePreview.src = event.target.result;
 
+            // Remove container styling after image loads
+            const imageContainer = document.getElementById("image-container");
+            imageContainer.style.backgroundColor = "transparent";
+            imageContainer.style.width = "";
+            imageContainer.style.height = "auto";
+
             // After the image is displayed, classify it
             await classifyImage(imagePreview);
         };
