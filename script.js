@@ -61,12 +61,31 @@ async function classifyImage(imageElement) {
 
         // Check if results is an array and has at least one item
         if (Array.isArray(results) && results.length > 0) {
-            // Display the results
+            const uniqueWords = new Set(); // To track unique words
+
+            // Process all results
             results.forEach((result) => {
-                const mlResult = `${result.label}`;
-                const tag = document.createElement("span");
-                tag.textContent = mlResult;
-                tagsDiv.appendChild(tag);
+                // Split label into individual words
+                const words = result.label.split(/,\s*|\s+/); // Split by commas or spaces
+
+                // Create a tag for each unique word
+                words.forEach((word) => {
+                    const cleanedWord = word.trim().toLowerCase();
+                    if (
+                        cleanedWord.length > 0 &&
+                        !uniqueWords.has(cleanedWord)
+                    ) {
+                        uniqueWords.add(cleanedWord);
+
+                        const tag = document.createElement("span");
+                        tag.className = "tag";
+                        tag.textContent = word.trim();
+                        tagsDiv.appendChild(tag);
+
+                        // Add space after tag (optional)
+                        tagsDiv.appendChild(document.createTextNode(" "));
+                    }
+                });
             });
         } else {
             console.error("Invalid results format:", results);
