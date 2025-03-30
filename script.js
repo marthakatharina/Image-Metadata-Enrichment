@@ -1,7 +1,8 @@
-// Initialize the Image Classifier with MobileNet
+// Initialize variables
 let classifier;
 let imagePreview;
 let tagsDiv;
+let selectedTagsContainer;
 
 // Load the MobileNet model
 async function initializeClassifier() {
@@ -25,21 +26,37 @@ function uploadImage() {
                     document.getElementById("image-container");
                 const previewIcon = document.getElementById("image-preview");
                 const tagsContainer = document.getElementById("tags-container");
+
+                // Clear existing containers
+                tagsContainer.innerHTML = "";
+
+                // Create heading for extracted tags
+                const pTag = document.createElement("p");
+                pTag.textContent = "Tags extracted from the image:";
+                tagsContainer.appendChild(pTag);
+
+                // Create tags container
+                tagsDiv = document.createElement("div");
+                tagsDiv.className = "tags";
+                tagsDiv.id = "tags";
+                tagsContainer.appendChild(tagsDiv);
+
+                // Create selected tags section
+                const selectedTagsHeading = document.createElement("p");
+                selectedTagsHeading.textContent = "Selected Tags:";
+                selectedTagsHeading.style.marginTop = "20px";
+                tagsContainer.appendChild(selectedTagsHeading);
+
+                selectedTagsContainer = document.createElement("div");
+                selectedTagsContainer.className = "selected-tags";
+                selectedTagsContainer.id = "selected-tags";
+                tagsContainer.appendChild(selectedTagsContainer);
+
+                // Update image styling
                 imageContainer.style.backgroundColor = "";
                 imageContainer.style.width = "";
                 imageContainer.style.height = "auto";
                 previewIcon.style.width = "100%";
-
-                // Create tags container if it doesn't exist
-                if (!tagsDiv) {
-                    tagsDiv = document.createElement("div");
-                    tagsDiv.className = "tags";
-                    tagsDiv.id = "tags";
-                    tagsContainer.appendChild(tagsDiv);
-                } else {
-                    // Clear previous tags
-                    tagsDiv.innerHTML = "";
-                }
 
                 // After the image is displayed, classify it
                 await classifyImage(imagePreview);
@@ -54,20 +71,15 @@ async function classifyImage(imageElement) {
     try {
         // Classify the image using MobileNet
         const results = await classifier.classify(imageElement);
-        // console.log("Classification results:", results);
 
-        const pTag = document.createElement("p");
-        pTag.textContent = "Extracted Tags: ";
-        tagsDiv.appendChild(pTag);
-
-        // Check if results is an array and has at least one item
-        if (Array.isArray(results) && results.length > 0) {
-            const uniqueWords = new Set(); // To track unique words
+        // Check if results is an array
+        if (Array.isArray(results)) {
+            const uniqueWords = new Set();
 
             // Process all results
             results.forEach((result) => {
                 // Split label into individual words
-                const words = result.label.split(/,\s*|\s+/); // Split by commas or spaces
+                const words = result.label.split(/,\s*|\s+/);
 
                 // Create a tag for each unique word
                 words.forEach((word) => {
@@ -81,15 +93,23 @@ async function classifyImage(imageElement) {
                         const tag = document.createElement("span");
                         tag.className = "tag";
                         tag.textContent = word.trim();
-                        tagsDiv.appendChild(tag);
 
-                        // Add space after tag (optional)
+                        // Create plus sign element
+                        const plusSign = document.createElement("span");
+                        plusSign.className = "plus-sign";
+                        plusSign.innerHTML = "➕";
+                        plusSign.addEventListener("click", (e) => {
+                            e.stopPropagation();
+                            addToSelectedTags(word.trim());
+                        });
+
+                        tag.appendChild(plusSign);
+                        tagsDiv.appendChild(tag);
                         tagsDiv.appendChild(document.createTextNode(" "));
                     }
                 });
             });
         } else {
-            console.error("Invalid results format:", results);
             tagsDiv.innerHTML = "No tags found. Please try another image.";
         }
     } catch (error) {
@@ -98,10 +118,35 @@ async function classifyImage(imageElement) {
     }
 }
 
+// Function to add tag to selected tags container
+function addToSelectedTags(tagText) {
+    // Check if tag already exists in selected tags
+    const existingTags = Array.from(
+        selectedTagsContainer.querySelectorAll(".selected-tag")
+    ).map((tag) => tag.textContent.replace("×", "").trim());
+
+    if (!existingTags.includes(tagText)) {
+        const selectedTag = document.createElement("span");
+        selectedTag.className = "selected-tag";
+        selectedTag.textContent = tagText;
+
+        // Add remove button
+        const removeBtn = document.createElement("span");
+        removeBtn.className = "remove-tag";
+        removeBtn.innerHTML = " ×";
+        removeBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            selectedTag.remove();
+        });
+
+        selectedTag.appendChild(removeBtn);
+        selectedTagsContainer.appendChild(selectedTag);
+    }
+}
+
 // Initialize the app
 async function initializeApp() {
     imagePreview = document.getElementById("image-preview");
-    tagsDiv = document.getElementById("tags");
 
     // Attach event listener to file input for automatic upload
     uploadImage();

@@ -18,25 +18,14 @@ h1 {
     text-align: center;
 }
 
-#upload-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(5px);
-}
-
 input[type="file"] {
     padding: 10px;
     border-radius: 10px;
-    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
-button {
+/* button {
     margin-top: 10px;
     padding: 10px 15px;
     border: none;
@@ -48,7 +37,7 @@ button {
 
 button:hover {
     transform: scale(1.05);
-}
+} */
 
 #image-container {
     display: flex;
@@ -89,10 +78,23 @@ button:hover {
     width: 100px;
 }
 
+#tags-container {
+    max-width: 800px;
+}
+
+#tags-container p {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 400;
+    color: gray;
+}
+
 .tags {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
+    gap: 8px;
 }
 
 .tags p {
@@ -101,11 +103,101 @@ button:hover {
     margin: auto;
 }
 
-.tags span {
-    margin: 5px;
-    padding: 10px 15px;
-    border-radius: 24px;
+.tag {
+    /* background-color: #e0e0ff; */
+    position: relative;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    align-content: center;
+}
+
+.tag::before {
+    content: "Click plus to add tag";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    pointer-events: none;
+    z-index: 10;
+    margin-bottom: 5px;
+}
+
+.tag::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    margin-bottom: -1px;
+}
+
+.tag:hover::before,
+.tag:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* .tag:hover {
+    background-color: #cfc9ef;
+} */
+
+.selected-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    gap: 8px;
+}
+
+.selected-tag {
+    background-color: #e0e0ff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.remove-tag {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #666;
+    font-weight: bold;
+}
+
+.remove-tag:hover {
+    color: #ff0000;
+}
+
+.plus-sign {
+    margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #e0e0ff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.plus-sign:hover {
+    background-color: #c5bdec;
 }
