@@ -56,8 +56,9 @@ async function classifyImage(imageElement) {
         const results = await classifier.classify(imageElement);
         // console.log("Classification results:", results);
 
-        // Clear previous tags
-        tagsDiv.innerHTML = "Extracted Tags:";
+        const pTag = document.createElement("p");
+        pTag.textContent = "Extracted Tags: ";
+        tagsDiv.appendChild(pTag);
 
         // Check if results is an array and has at least one item
         if (Array.isArray(results) && results.length > 0) {
