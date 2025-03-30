@@ -9,27 +9,44 @@ async function initializeClassifier() {
     console.log("MobileNet model loaded!");
 }
 
-// Function to handle image upload
 function uploadImage() {
     const fileInput = document.getElementById("image-upload");
-    const file = fileInput.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = async function (event) {
-            // Set the image source to the uploaded file
-            imagePreview.src = event.target.result;
 
-            // Remove container styling after image loads
-            const imageContainer = document.getElementById("image-container");
-            imageContainer.style.backgroundColor = "transparent";
-            imageContainer.style.width = "";
-            imageContainer.style.height = "auto";
+    fileInput.addEventListener("change", async function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = async function (event) {
+                // Set the image source to the uploaded file
+                imagePreview.src = event.target.result;
 
-            // After the image is displayed, classify it
-            await classifyImage(imagePreview);
-        };
-        reader.readAsDataURL(file);
-    }
+                // Change styling after image loads
+                const imageContainer =
+                    document.getElementById("image-container");
+                const previewIcon = document.getElementById("image-preview");
+                const tagsContainer = document.getElementById("tags-container");
+                imageContainer.style.backgroundColor = "";
+                imageContainer.style.width = "";
+                imageContainer.style.height = "auto";
+                previewIcon.style.width = "100%";
+
+                // Create tags container if it doesn't exist
+                if (!tagsDiv) {
+                    tagsDiv = document.createElement("div");
+                    tagsDiv.className = "tags";
+                    tagsDiv.id = "tags";
+                    tagsContainer.appendChild(tagsDiv);
+                } else {
+                    // Clear previous tags
+                    tagsDiv.innerHTML = "";
+                }
+
+                // After the image is displayed, classify it
+                await classifyImage(imagePreview);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 }
 
 // Function to classify the image
@@ -37,20 +54,19 @@ async function classifyImage(imageElement) {
     try {
         // Classify the image using MobileNet
         const results = await classifier.classify(imageElement);
-
-        console.log("Classification results:", results);
+        // console.log("Classification results:", results);
 
         // Clear previous tags
-        tagsDiv.innerHTML = "";
+        tagsDiv.innerHTML = "Extracted Tags:";
 
         // Check if results is an array and has at least one item
         if (Array.isArray(results) && results.length > 0) {
             // Display the results
             results.forEach((result) => {
-                const tag = `${result.label}`;
-                const p = document.createElement("p");
-                p.textContent = tag;
-                tagsDiv.appendChild(p);
+                const mlResult = `${result.label}`;
+                const tag = document.createElement("span");
+                tag.textContent = tag;
+                tagsDiv.appendChild(mlResult);
             });
         } else {
             console.error("Invalid results format:", results);
@@ -66,6 +82,9 @@ async function classifyImage(imageElement) {
 async function initializeApp() {
     imagePreview = document.getElementById("image-preview");
     tagsDiv = document.getElementById("tags");
+
+    // Attach event listener to file input for automatic upload
+    uploadImage();
 
     // Initialize the classifier
     await initializeClassifier();
