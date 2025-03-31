@@ -178,7 +178,7 @@ input[type="file"] {
 }
 
 .remove-tag {
-    margin-left: 5px;
+    margin-left: 8px;
     cursor: pointer;
     color: #6f6f6f;
     font-weight: bold;
