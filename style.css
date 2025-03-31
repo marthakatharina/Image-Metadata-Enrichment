@@ -1,15 +1,19 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    flex-direction: column;
+    gap: 20px;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: linear-gradient(
+    /* background: linear-gradient(
         to bottom,
         rgba(255, 255, 255, 0.8),
         rgba(0, 0, 0, 0.1)
-    );
+    ); */
+}
+
+#upload-container {
+    text-align: center;
 }
 
 h1 {
@@ -24,20 +28,6 @@ input[type="file"] {
     box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
-
-/* button {
-    margin-top: 10px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-}
-
-button:hover {
-    transform: scale(1.05);
-} */
 
 #image-container {
     display: flex;
@@ -79,15 +69,24 @@ button:hover {
 }
 
 #tags-container {
-    max-width: 800px;
+    max-width: 350px;
+    text-align: center;
 }
 
-#tags-container p {
+#tags-container h3 {
     margin-top: 30px;
     margin-bottom: 10px;
     text-align: center;
+    font-size: 16px;
     font-weight: 400;
-    color: gray;
+    color: #5b5b5b;
+}
+
+#tags-container p {
+    font-size: 12px;
+    font-weight: 400;
+    color: #cccccc;
+    margin: 0;
 }
 
 .tags {
@@ -95,6 +94,8 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    justify-content: center;
+    padding-bottom: 20px;
 }
 
 .tags p {
@@ -136,7 +137,7 @@ button:hover {
 .tag::after {
     content: "";
     position: absolute;
-    bottom: 100%;
+    bottom: 90%;
     left: 50%;
     transform: translateX(-50%);
     border-width: 5px;
@@ -159,10 +160,11 @@ button:hover {
 } */
 
 .selected-tags {
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 10px;
     gap: 8px;
+    justify-content: center;
 }
 
 .selected-tag {
@@ -200,4 +202,10 @@ button:hover {
 
 .plus-sign:hover {
     background-color: #c5bdec;
+}
+
+@media only screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
 }

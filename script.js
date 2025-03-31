@@ -3,6 +3,7 @@ let classifier;
 let imagePreview;
 let tagsDiv;
 let selectedTagsContainer;
+let selectedTagsEmpty;
 
 // Load the MobileNet model
 async function initializeClassifier() {
@@ -12,6 +13,9 @@ async function initializeClassifier() {
 
 function uploadImage() {
     const fileInput = document.getElementById("image-upload");
+
+    // Clear file input on page load
+    fileInput.value = "";
 
     fileInput.addEventListener("change", async function () {
         const file = this.files[0];
@@ -31,8 +35,8 @@ function uploadImage() {
                 tagsContainer.innerHTML = "";
 
                 // Create heading for extracted tags
-                const pTag = document.createElement("p");
-                pTag.textContent = "Tags extracted from the image:";
+                const pTag = document.createElement("h3");
+                pTag.textContent = "Tags extracted from your image";
                 tagsContainer.appendChild(pTag);
 
                 // Create tags container
@@ -42,10 +46,13 @@ function uploadImage() {
                 tagsContainer.appendChild(tagsDiv);
 
                 // Create selected tags section
-                const selectedTagsHeading = document.createElement("p");
-                selectedTagsHeading.textContent = "Selected Tags:";
-                selectedTagsHeading.style.marginTop = "20px";
+                const selectedTagsHeading = document.createElement("h3");
+                selectedTagsEmpty = document.createElement("p");
+                selectedTagsHeading.textContent = "Tags you selected";
+                selectedTagsEmpty.textContent =
+                    "You haven't selected any tags yet.";
                 tagsContainer.appendChild(selectedTagsHeading);
+                tagsContainer.appendChild(selectedTagsEmpty);
 
                 selectedTagsContainer = document.createElement("div");
                 selectedTagsContainer.className = "selected-tags";
@@ -120,6 +127,7 @@ async function classifyImage(imageElement) {
 
 // Function to add tag to selected tags container
 function addToSelectedTags(tagText) {
+    selectedTagsEmpty.remove();
     // Check if tag already exists in selected tags
     const existingTags = Array.from(
         selectedTagsContainer.querySelectorAll(".selected-tag")
