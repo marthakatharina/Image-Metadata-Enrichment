@@ -150,6 +150,14 @@ function addToSelectedTags(tagText) {
         selectedTag.appendChild(removeBtn);
         selectedTagsContainer.appendChild(selectedTag);
     }
+    // After adding the tag:
+    setTimeout(() => {
+        selectedTagsContainer.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+        });
+    }, 100); // Small delay to allow DOM update
 }
 
 // Initialize the app
