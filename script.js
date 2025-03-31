@@ -104,7 +104,7 @@ async function classifyImage(imageElement) {
                         // Create plus sign element
                         const plusSign = document.createElement("span");
                         plusSign.className = "plus-sign";
-                        plusSign.innerHTML = "➕";
+                        plusSign.innerHTML = "+";
                         plusSign.addEventListener("click", (e) => {
                             e.stopPropagation();
                             addToSelectedTags(word.trim());
