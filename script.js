@@ -51,7 +51,7 @@ function uploadImage() {
                 selectedTagsEmpty.className = "tags-empty-state";
                 selectedTagsHeading.textContent = "Selected Tags";
                 selectedTagsEmpty.textContent =
-                    "Selected tags will be added to all your tags.\n\nNo tags added yet.\n\nClick + button to add a tag.";
+                    "Selected tags will be added to all your tags.\n\nNo tags selected yet.\n\nClick + button to add a tag.";
                 tagsContainer.appendChild(selectedTagsHeading);
                 tagsContainer.appendChild(selectedTagsEmpty);
 
