@@ -12,27 +12,40 @@
         ></script>
     </head>
     <body>
-        <div>
-            <div id="upload-container">
-                <h1>Upload an Image</h1>
-                <div id="upload-section">
-                    <input type="file" id="image-upload" accept="image/*" />
+        <main>
+            <div class="saved-tags-container" id="saved-tags-container">
+                <button class="saved-tags-toggle">×</button>
+                <div class="saved-tags-content">
+                    <h2>All Your Saved Tags</h2>
+                    <div class="saved-tags" id="saved-tags"></div>
                 </div>
             </div>
 
-            <div id="image-container">
-                <img
-                    id="image-preview"
-                    src="./assets/images/image-preview.png"
-                    alt="Image Preview"
-                />
+            <div id="file-wrap">
+                <div>
+                    <div id="upload-container">
+                        <h1>Upload an Image</h1>
+                        <div id="upload-section">
+                            <input
+                                type="file"
+                                id="image-upload"
+                                accept="image/*"
+                            />
+                        </div>
+                    </div>
+
+                    <div id="image-container">
+                        <img
+                            id="image-preview"
+                            src="./assets/images/image-preview.png"
+                            alt="Image Preview"
+                        />
+                    </div>
+                </div>
+
+                <div class="tags-container" id="tags-container"></div>
             </div>
-        </div>
-        <div class="tags-container" id="tags-container"></div>
-        <div class="saved-tags-container" id="saved-tags-container">
-            <h2>Your All Saved Tags</h2>
-            <div class="saved-tags" id="saved-tags"></div>
-        </div>
+        </main>
         <script src="file.js"></script>
     </body>
 </html>

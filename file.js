@@ -37,17 +37,30 @@ function uploadImage() {
 
                 // Clear existing containers
                 tagsContainer.innerHTML = "";
-
+                const tagsWrap = document.createElement("div");
+                tagsWrap.className = "extracted-tags";
+                tagsContainer.appendChild(tagsWrap);
                 // Create heading for extracted tags
                 const pTag = document.createElement("h3");
-                pTag.textContent = "Extracted Tags from Your Image";
-                tagsContainer.appendChild(pTag);
+                pTag.textContent = "Image Analysis Results";
+                tagsWrap.appendChild(pTag);
 
                 // Create tags container
                 tagsDiv = document.createElement("div");
                 tagsDiv.className = "tags";
                 tagsDiv.id = "tags";
-                tagsContainer.appendChild(tagsDiv);
+                tagsWrap.appendChild(tagsDiv);
+
+                // Add remove button
+                const removeExtractedTags = document.createElement("span");
+                removeExtractedTags.className = "remove-extracted-tags";
+                removeExtractedTags.innerHTML = " ×";
+                removeExtractedTags.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    tagsWrap.remove();
+                });
+
+                tagsWrap.appendChild(removeExtractedTags);
 
                 // Create selected tags section
                 const selectedTagsHeading = document.createElement("h3");
@@ -266,6 +279,18 @@ function addToSelectedTags(tagText) {
 async function initializeApp() {
     imagePreview = document.getElementById("image-preview");
     savedTagsContainer = document.getElementById("saved-tags-container");
+
+    const toggleBtn = document.querySelector(".saved-tags-toggle");
+
+    // Start collapsed by default
+    savedTagsContainer.classList.add("collapsed");
+
+    toggleBtn.addEventListener("click", function () {
+        savedTagsContainer.classList.toggle("collapsed");
+        // Update button text based on state
+        const isCollapsed = savedTagsContainer.classList.contains("collapsed");
+        toggleBtn.textContent = isCollapsed ? "×" : "☰";
+    });
 
     // Initialize saved tags display
     renderSavedTags();
