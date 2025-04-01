@@ -52,7 +52,7 @@ input[type="file"] {
 }
 
 #image-container::after {
-    content: "Your image will be analyzed here";
+    content: "AI will analyze you image for tags here";
     position: absolute;
     bottom: 5%;
     left: 50%;
@@ -100,7 +100,7 @@ input[type="file"] {
 .tags-empty-state {
     font-size: 12px;
     font-weight: 400;
-    color: #bdbdbd;
+    color: #b0b0b0;
     margin-top: 10px;
 }
 
