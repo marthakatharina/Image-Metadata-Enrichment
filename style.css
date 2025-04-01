@@ -1,15 +1,10 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    gap: 20px;
+    gap: 30px;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    /* background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.8),
-        rgba(0, 0, 0, 0.1)
-    ); */
 }
 
 #upload-container {
@@ -51,17 +46,18 @@ input[type="file"] {
     height: 100%;
     background: url("./assets/images/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg.webp")
         no-repeat top center/cover;
-    animation: fadeImages 10s forwards;
+    animation: fadeImages 3s forwards;
+    animation-delay: 5s;
     border-radius: 15px;
 }
 
-/* #image-container::after {
-    content: "Your image here";
+#image-container::after {
+    content: "Your image will be analyzed here";
     position: absolute;
-    bottom: 50%;
+    bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #000000e5;
+    background-color: #00000054;
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
@@ -70,8 +66,9 @@ input[type="file"] {
     transition: opacity 0.3s, visibility 0.3s;
     pointer-events: none;
     z-index: 10;
-    animation: fadeImages 10s forwards;
-} */
+    animation: fadeImages 3s forwards;
+    animation-delay: 4s;
+}
 
 @keyframes fadeImages {
     0% {
@@ -137,7 +134,7 @@ input[type="file"] {
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #333;
+    background-color: #333333ee;
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
