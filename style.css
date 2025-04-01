@@ -55,6 +55,24 @@ input[type="file"] {
     border-radius: 15px;
 }
 
+/* #image-container::after {
+    content: "Your image here";
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000000e5;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    transition: opacity 0.3s, visibility 0.3s;
+    pointer-events: none;
+    z-index: 10;
+    animation: fadeImages 10s forwards;
+} */
+
 @keyframes fadeImages {
     0% {
         opacity: 1;
@@ -79,14 +97,13 @@ input[type="file"] {
     text-align: center;
     font-size: 16px;
     font-weight: 400;
-    color: #5b5b5b;
+    color: #515151;
 }
 
-#tags-container p {
+.tags-empty-state {
     font-size: 12px;
     font-weight: 400;
-    color: #cccccc;
-    margin: 0;
+    color: #bdbdbd;
 }
 
 .tags {
@@ -98,14 +115,13 @@ input[type="file"] {
     padding-bottom: 20px;
 }
 
-.tags p {
-    display: block !important;
+/* .tags p {
+    display: block;
     text-align: center;
     margin: auto;
-}
+} */
 
 .tag {
-    /* background-color: #e0e0ff; */
     position: relative;
     padding: 8px 15px;
     border-radius: 10px;
@@ -115,7 +131,7 @@ input[type="file"] {
 }
 
 .tag::before {
-    content: "Click plus to add tag";
+    content: "Click + to add tag";
     position: absolute;
     bottom: 100%;
     left: 50%;
@@ -156,7 +172,7 @@ input[type="file"] {
 }
 
 /* .tag:hover {
-    background-color: #cfc9ef;
+    background-color: #deeacf;
 } */
 
 .selected-tags {
@@ -179,13 +195,21 @@ input[type="file"] {
 
 .remove-tag {
     margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
     cursor: pointer;
-    color: #6f6f6f;
     font-weight: bold;
+    background-color: #407b00;
+    color: #ffffff;
 }
 
 .remove-tag:hover {
     color: #ff0000;
+    background-color: #dfeacf;
 }
 
 .plus-sign {

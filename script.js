@@ -36,7 +36,7 @@ function uploadImage() {
 
                 // Create heading for extracted tags
                 const pTag = document.createElement("h3");
-                pTag.textContent = "Tags extracted from your image";
+                pTag.textContent = "Extracted Tags from Your Image";
                 tagsContainer.appendChild(pTag);
 
                 // Create tags container
@@ -48,9 +48,10 @@ function uploadImage() {
                 // Create selected tags section
                 const selectedTagsHeading = document.createElement("h3");
                 selectedTagsEmpty = document.createElement("p");
-                selectedTagsHeading.textContent = "Tags you selected";
+                selectedTagsEmpty.className = "tags-empty-state";
+                selectedTagsHeading.textContent = "Selected Tags";
                 selectedTagsEmpty.textContent =
-                    "You haven't selected any tags yet.";
+                    "Selected tags will be added to all your tags.\n\nNo tags added yet.\n\nClick + button to add a tag.";
                 tagsContainer.appendChild(selectedTagsHeading);
                 tagsContainer.appendChild(selectedTagsEmpty);
 
