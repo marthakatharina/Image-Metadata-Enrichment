@@ -104,6 +104,7 @@ input[type="file"] {
     font-size: 12px;
     font-weight: 400;
     color: #bdbdbd;
+    margin-top: 10px;
 }
 
 .tags {
