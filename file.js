@@ -4,6 +4,10 @@ let imagePreview;
 let tagsDiv;
 let selectedTagsContainer;
 let selectedTagsEmpty;
+let savedTags = new Set();
+let customTagInput;
+let addTagBtn;
+let savedTagsContainer;
 
 // Load the MobileNet model
 async function initializeClassifier() {
@@ -49,9 +53,9 @@ function uploadImage() {
                 const selectedTagsHeading = document.createElement("h3");
                 selectedTagsEmpty = document.createElement("p");
                 selectedTagsEmpty.className = "tags-empty-state";
-                selectedTagsHeading.textContent = "Selected Tags";
+                selectedTagsHeading.textContent = "Saved Tags for This Image";
                 selectedTagsEmpty.textContent =
-                    "Selected tags will be added to all your tags.\n\nNo tags selected yet.\n\nClick + button to add a tag.";
+                    "No tags saved yet.\n\nClick + button to add a tag or add your own.";
                 tagsContainer.appendChild(selectedTagsHeading);
                 tagsContainer.appendChild(selectedTagsEmpty);
 
@@ -65,6 +69,26 @@ function uploadImage() {
                 imageContainer.style.width = "";
                 imageContainer.style.height = "auto";
                 previewIcon.style.width = "100%";
+
+                // Add custom tag input
+                const addTagContainer = document.createElement("div");
+                addTagContainer.className = "add-tag-container";
+
+                customTagInput = document.createElement("input");
+                customTagInput.type = "text";
+                customTagInput.id = "custom-tag-input";
+                customTagInput.placeholder = "Add your own tag...";
+
+                addTagBtn = document.createElement("button");
+                addTagBtn.id = "add-tag-btn";
+                addTagBtn.textContent = "Add Tag";
+
+                addTagContainer.appendChild(customTagInput);
+                addTagContainer.appendChild(addTagBtn);
+                tagsContainer.appendChild(addTagContainer);
+
+                // Set up event listeners for custom tags
+                setupCustomTagInput();
 
                 // After the image is displayed, classify it
                 await classifyImage(imagePreview);
@@ -126,6 +150,77 @@ async function classifyImage(imageElement) {
     }
 }
 
+function setupCustomTagInput() {
+    // Add tag on button click
+    addTagBtn.addEventListener("click", addCustomTag);
+
+    // Add tag on Enter key
+    customTagInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            addCustomTag();
+        }
+    });
+}
+
+function addCustomTag() {
+    const tagText = customTagInput.value.trim();
+    if (tagText) {
+        // Add to selected tags
+        addToSelectedTags(tagText);
+
+        // Add to saved tags
+        if (!savedTags.has(tagText)) {
+            savedTags.add(tagText);
+            renderSavedTags();
+        }
+
+        // Clear the input
+        customTagInput.value = "";
+    }
+}
+
+function renderSavedTags() {
+    const container = document.getElementById("saved-tags");
+    container.innerHTML = "";
+
+    if (savedTags.size === 0) {
+        const emptyMsg = document.createElement("p");
+        emptyMsg.className = "tags-empty-state";
+        emptyMsg.textContent = "No saved tags yet";
+        container.appendChild(emptyMsg);
+        return;
+    }
+
+    savedTags.forEach((tag) => {
+        const tagElement = document.createElement("span");
+        tagElement.className = "saved-tag";
+        tagElement.textContent = tag;
+
+        // Add plus sign to add to selected tags
+        const plusSign = document.createElement("span");
+        plusSign.className = "plus-sign";
+        plusSign.innerHTML = "+";
+        plusSign.addEventListener("click", (e) => {
+            e.stopPropagation();
+            addToSelectedTags(tag);
+        });
+
+        // Add remove button to delete from saved tags
+        const removeBtn = document.createElement("span");
+        removeBtn.className = "remove-tag";
+        removeBtn.innerHTML = " ×";
+        removeBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            savedTags.delete(tag);
+            renderSavedTags();
+        });
+
+        tagElement.appendChild(plusSign);
+        tagElement.appendChild(removeBtn);
+        container.appendChild(tagElement);
+    });
+}
+
 // Function to add tag to selected tags container
 function addToSelectedTags(tagText) {
     selectedTagsEmpty.remove();
@@ -150,6 +245,12 @@ function addToSelectedTags(tagText) {
 
         selectedTag.appendChild(removeBtn);
         selectedTagsContainer.appendChild(selectedTag);
+
+        // Add to saved tags if not already present
+        if (!savedTags.has(tagText)) {
+            savedTags.add(tagText);
+            renderSavedTags();
+        }
     }
     // After adding the tag:
     setTimeout(() => {
@@ -164,6 +265,10 @@ function addToSelectedTags(tagText) {
 // Initialize the app
 async function initializeApp() {
     imagePreview = document.getElementById("image-preview");
+    savedTagsContainer = document.getElementById("saved-tags-container");
+
+    // Initialize saved tags display
+    renderSavedTags();
 
     // Attach event listener to file input for automatic upload
     uploadImage();

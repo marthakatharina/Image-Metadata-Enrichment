@@ -24,6 +24,12 @@ input[type="file"] {
     cursor: pointer;
 }
 
+/* input[type="file"]:focus {
+    outline: none;
+    border-color: #407b00;
+    box-shadow: 0 0 0 2px rgba(64, 123, 0, 0.2);
+} */
+
 #image-container {
     display: flex;
     align-items: center;
@@ -113,12 +119,6 @@ input[type="file"] {
     padding-bottom: 20px;
 }
 
-/* .tags p {
-    display: block;
-    text-align: center;
-    margin: auto;
-} */
-
 .tag {
     position: relative;
     padding: 8px 15px;
@@ -173,6 +173,25 @@ input[type="file"] {
     background-color: #deeacf;
 } */
 
+.plus-sign {
+    margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #dfeacf;
+    cursor: pointer;
+    color: #6f6f6f;
+    font-weight: bold;
+}
+
+.plus-sign:hover {
+    background-color: #407b00;
+    color: #ffffff;
+}
+
 .selected-tags {
     margin-top: 10px;
     display: flex;
@@ -210,27 +229,62 @@ input[type="file"] {
     background-color: #dfeacf;
 }
 
-.plus-sign {
-    margin-left: 8px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #dfeacf;
-    cursor: pointer;
-    color: #6f6f6f;
-    font-weight: bold;
-}
-
-.plus-sign:hover {
-    background-color: #407b00;
-    color: #ffffff;
-}
-
 @media only screen and (max-width: 768px) {
     body {
         flex-direction: column;
     }
+}
+
+.add-tag-container {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+#custom-tag-input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    min-width: 150px;
+    font-size: 14px;
+}
+
+#add-tag-btn {
+    padding: 8px 15px;
+    background-color: #407b00;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+#add-tag-btn:hover {
+    background-color: #306000;
+}
+
+#custom-tag-input:focus {
+    outline: none;
+    border-color: #407b00;
+    box-shadow: 0 0 0 2px rgba(64, 123, 0, 0.2);
+}
+
+.saved-tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.saved-tag {
+    background-color: #f0f0f0;
+    padding: 8px 15px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
