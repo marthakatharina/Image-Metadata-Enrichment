@@ -13,10 +13,21 @@
     </head>
     <body>
         <main>
-            <div class="saved-tags-container" id="saved-tags-container">
-                <button class="saved-tags-toggle">×</button>
+            <div
+                class="saved-tags-container collapsed"
+                id="saved-tags-container"
+            >
+                <button class="saved-tags-toggle">☰</button>
                 <div class="saved-tags-content">
                     <h2>All Your Saved Tags</h2>
+                    <div class="tags-filter">
+                        <label for="filter-tags">Filter Tags by:</label>
+                        <select id="filter-tags">
+                            <option value="all">All Tags</option>
+                            <option value="item-type">Item Type</option>
+                            <option value="collection">Collection</option>
+                        </select>
+                    </div>
                     <div class="saved-tags" id="saved-tags"></div>
                 </div>
             </div>

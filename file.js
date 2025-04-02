@@ -282,14 +282,10 @@ async function initializeApp() {
 
     const toggleBtn = document.querySelector(".saved-tags-toggle");
 
-    // Start collapsed by default
-    savedTagsContainer.classList.add("collapsed");
-
     toggleBtn.addEventListener("click", function () {
         savedTagsContainer.classList.toggle("collapsed");
-        // Update button text based on state
         const isCollapsed = savedTagsContainer.classList.contains("collapsed");
-        toggleBtn.textContent = isCollapsed ? "×" : "☰";
+        toggleBtn.textContent = isCollapsed ? "☰" : "×";
     });
 
     // Initialize saved tags display
