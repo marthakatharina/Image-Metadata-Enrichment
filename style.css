@@ -74,9 +74,11 @@ input[type="file"] {
     height: 100%;
     background: url("./assets/images/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg.webp")
         no-repeat top center/cover;
-    animation: fadeImages 3s forwards;
-    animation-delay: 5s;
+    /* animation: fadeImages 3s forwards;
+    animation-delay: 5s; */
     border-radius: 15px;
+    opacity: 0;
+    animation: fadeIn 2s ease-in forwards, fadeOut 2s ease-out 10s forwards;
 }
 
 #image-container::after {
@@ -94,11 +96,19 @@ input[type="file"] {
     transition: opacity 0.3s, visibility 0.3s;
     pointer-events: none;
     z-index: 10;
-    animation: fadeImages 3s forwards;
-    animation-delay: 4s;
+    animation: fadeIn 2s ease-in forwards, fadeOut 2s ease-out 10s forwards;
 }
 
-@keyframes fadeImages {
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
     0% {
         opacity: 1;
     }
