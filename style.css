@@ -76,7 +76,8 @@ input[type="file"] {
         no-repeat top center/cover;
     border-radius: 15px;
     opacity: 0;
-    animation: fadeIn 2s ease-in forwards, fadeOut 2s ease-out 8s forwards;
+    animation: fadeIn 2s ease-in forwards, fadeOut 2s ease-out 7s forwards;
+    filter: blur(5px);
 }
 
 #image-container::after {
@@ -94,7 +95,7 @@ input[type="file"] {
     transition: opacity 0.3s, visibility 0.3s;
     pointer-events: none;
     z-index: 10;
-    animation: fadeIn 2s ease-in forwards, fadeOut 2s ease-out 8s forwards;
+    animation: fadeIn 2s ease-in forwards, fadeOut 2s ease-out 7s forwards;
 }
 
 @keyframes fadeIn {
