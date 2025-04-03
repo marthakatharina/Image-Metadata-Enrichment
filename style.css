@@ -406,14 +406,14 @@ h3 {
 }
 
 .tags-filter label {
-    display: block;
-    margin-bottom: 5px;
+    /* display: block;
+    margin-bottom: 5px; */
     font-size: 0.8rem;
     color: #555;
 }
 
 .tags-filter select {
-    width: 100%;
+    /* width: 100%; */
     padding: 6px 10px;
     border: 1px solid #e6e6e6;
     border-radius: 8px;
