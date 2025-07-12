@@ -42,7 +42,7 @@ function uploadImage() {
                 tagsContainer.appendChild(tagsWrap);
                 // Create heading for extracted tags
                 const pTag = document.createElement("h3");
-                pTag.textContent = "Image Analysis Results";
+                pTag.textContent = "AI Image Analysis Results";
                 tagsWrap.appendChild(pTag);
 
                 // Create tags container
@@ -63,19 +63,26 @@ function uploadImage() {
                 tagsWrap.appendChild(removeExtractedTags);
 
                 // Create selected tags section
+
+                const selectedTagsWrapper = document.createElement("div");
+                selectedTagsWrapper.className = "selected-tags-wrapper";
+                selectedTagsWrapper.id = "selected-tags-wrapper";
+                tagsContainer.appendChild(selectedTagsWrapper);
+
                 const selectedTagsHeading = document.createElement("h3");
                 selectedTagsEmpty = document.createElement("p");
                 selectedTagsEmpty.className = "tags-empty-state";
-                selectedTagsHeading.textContent = "Saved Tags for This Image";
+                selectedTagsHeading.textContent =
+                    "Selected Tags for This Image";
                 selectedTagsEmpty.textContent =
-                    "No tags saved yet.\n\nClick + button to add a tag or add your own.";
-                tagsContainer.appendChild(selectedTagsHeading);
-                tagsContainer.appendChild(selectedTagsEmpty);
+                    "No tags selected yet.\n\nClick + button to add a tag or add your own.";
+                selectedTagsWrapper.appendChild(selectedTagsHeading);
+                selectedTagsWrapper.appendChild(selectedTagsEmpty);
 
                 selectedTagsContainer = document.createElement("div");
                 selectedTagsContainer.className = "selected-tags";
                 selectedTagsContainer.id = "selected-tags";
-                tagsContainer.appendChild(selectedTagsContainer);
+                selectedTagsWrapper.appendChild(selectedTagsContainer);
 
                 // Update image styling
                 imageContainer.style.backgroundColor = "";

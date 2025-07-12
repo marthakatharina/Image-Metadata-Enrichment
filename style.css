@@ -67,7 +67,7 @@ input[type="file"] {
     position: relative;
 }
 
-#image-container::before {
+/* #image-container::before {
     content: "";
     position: absolute;
     width: 100%;
@@ -77,7 +77,7 @@ input[type="file"] {
     border-radius: 15px;
     opacity: 0;
     animation: fadeIn 2s ease-in forwards, fadeOut 2s ease-out 5s forwards;
-}
+} */
 
 #image-container::after {
     content: "AI will analyse you image for tags here";
@@ -222,6 +222,15 @@ h3 {
     color: #ffffff;
 }
 
+.selected-tags-wrapper {
+    position: relative;
+    padding: 0.4em;
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
 .selected-tags {
     margin-top: 10px;
     display: flex;
@@ -270,10 +279,11 @@ h3 {
     display: flex;
     gap: 8px;
     margin-top: 15px;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 #custom-tag-input {
+    flex-grow: 1;
     padding: 8px 12px;
     border: 1px solid #ddd;
     border-radius: 10px;
