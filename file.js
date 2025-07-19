@@ -30,6 +30,8 @@ function uploadImage() {
                 imagePreview.src = event.target.result;
 
                 // Change styling after image loads
+                const h1 = document.getElementById("intro-heading");
+                h1.remove();
                 const imageContainer =
                     document.getElementById("image-container");
                 const previewIcon = document.getElementById("image-preview");
@@ -42,7 +44,7 @@ function uploadImage() {
                 tagsContainer.appendChild(tagsWrap);
                 // Create heading for extracted tags
                 const pTag = document.createElement("h3");
-                pTag.textContent = "AI Image Analysis Results";
+                pTag.textContent = "Image Analysis Results";
                 tagsWrap.appendChild(pTag);
 
                 // Create tags container
