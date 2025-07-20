@@ -35,6 +35,32 @@ main {
 #intro-heading {
     position: absolute;
     top: 15px;
+    /* top: 49%;
+    left: 49%;
+    transform: translate(-50%, -50%); */
+}
+.typewriter {
+    display: inline-block; /* Crucial for width & overflow to work */
+    vertical-align: bottom;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3s steps(30) 1s 1 normal both,
+        blink 0.7s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 30ch;
+    } /* Adjust this to match your text length */
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
 }
 h1 {
     font-size: 24px;
@@ -90,7 +116,7 @@ input[type="file"] {
 }
 
 #image-container::after {
-    content: "AI will analyse you image for tags here";
+    content: "AI will extract tags from your image";
     position: absolute;
     bottom: 5%;
     left: 50%;
@@ -104,7 +130,8 @@ input[type="file"] {
     transition: opacity 0.3s, visibility 0.3s;
     pointer-events: none;
     z-index: 10;
-    animation: fadeIn 1s ease-in forwards, fadeOut 2s ease-out 6s forwards;
+    opacity: 0;
+    animation: fadeIn 2s ease-in 4s forwards, fadeOut 2s ease-out 10s forwards;
 }
 
 @keyframes fadeIn {
