@@ -31,7 +31,9 @@ function uploadImage() {
 
                 // Change styling after image loads
                 const h1 = document.getElementById("intro-heading");
-                h1.remove();
+                h1.style.display = "none";
+                const h2 = document.getElementById("upload-heading");
+                h2.textContent = "Upload another image";
                 const imageContainer =
                     document.getElementById("image-container");
                 const previewIcon = document.getElementById("image-preview");
